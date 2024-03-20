@@ -18,6 +18,11 @@ const { ccclass, property } = _decorator;
 @ccclass('SelfPlane')
 export class SelfPlane extends Component {
 
+    public lifeValue = 5
+    public isLive = true
+
+    private _curLife = 0
+    
     onEnable() {
         const collider = this.getComponent(Collider)
         if (collider) {
@@ -32,6 +37,11 @@ export class SelfPlane extends Component {
         }
     }
 
+    public init() {
+        this._curLife = this.lifeValue
+        this.isLive = true
+    }
+
     // update (deltaTime: number) {
     //     // [4]
     // }
@@ -39,7 +49,11 @@ export class SelfPlane extends Component {
     private _onTriggerEnter(event: ITriggerEvent) {
         const collisionGroup = event.otherCollider.getGroup()
         if (collisionGroup === Constant.CollisionType.ENEMY_BULLET || collisionGroup === Constant.CollisionType.ENEMY_PLANE) {
-            console.log('reduce blood')
+            this._curLife--
+            if (this._curLife <= 0) {
+                console.log('plane die')
+                this.isLive = false
+            }
         }
     }
 }

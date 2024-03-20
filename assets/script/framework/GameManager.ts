@@ -1,9 +1,10 @@
 
-import { _decorator, BoxCollider, Component, instantiate, macro, math, Node, Prefab, Vec3 } from 'cc';
+import { _decorator, BoxCollider, Component, instantiate, Label, macro, math, Node, Prefab, Vec3 } from 'cc';
 import { Bullet } from '../bullet/Bullet';
 import { Constant } from './Constant';
 import { EnemyPlane } from '../plane/EnemyPlane';
 import { BulletProp } from '../bullet/BulletProp';
+import { SelfPlane } from '../plane/SelfPlane';
 const { ccclass, property } = _decorator;
 
 /**
@@ -25,8 +26,8 @@ interface EnemyPlaneInstance {
  
 @ccclass('GameManager')
 export class GameManager extends Component {
-    @property(Node)
-    public playerPlane: Node = null
+    @property(SelfPlane)
+    public playerPlane: SelfPlane = null
     // bullet
     @property(Node)
     public bulletRoot:Node = null
@@ -58,6 +59,16 @@ export class GameManager extends Component {
     @property
     public bulletPropSpeed = 0.3
 
+    // page
+    @property(Node)
+    public gamePage:Node = null
+    @property(Node)
+    public gameOverPage:Node = null
+    @property(Label)
+    public gameScore:Label = null
+    @property(Label)
+    public gameOverScore:Label = null
+
     @property
     public createEnemyTime = 1
     @property
@@ -71,17 +82,27 @@ export class GameManager extends Component {
     @property
     public shootTime = 0.3
 
+    @property
+    public isGagmeStart = false
+
     private _currentShootTime = 1
     private _isShooting = false
     private _currentCreateEnemyTime = 0
     private _combinationInterval = Constant.Combination.PLAN1
     private _bulletPropType = Constant.BulletPropType.BULLET_M 
+    private _score = 0
 
     start () {
         this._init()
     }
 
     update (deltaTime: number) {
+        if (!this.isGagmeStart) return
+        if (!this.playerPlane.isLive) {
+            this.gameOver()
+            return
+        }
+
         this._currentShootTime += deltaTime
         this._currentCreateEnemyTime += deltaTime
         if (this._isShooting && this._currentShootTime > this.shootTime) {
@@ -129,11 +150,52 @@ export class GameManager extends Component {
 
     private _init() {
         this._currentShootTime = this.shootTime
+    }
+
+    public returnMain() {
+        this._currentShootTime = 1
+        this._isShooting = false
+        this._currentCreateEnemyTime = 0
+        this._combinationInterval = Constant.Combination.PLAN1
+        this._bulletPropType = Constant.BulletPropType.BULLET_M
+        this._score = 0
+        if (this.playerPlane.node) {
+            this.playerPlane.node.setPosition(0, 0, 9) 
+        }
+    }
+
+    public gameStart() {
+        this.isGagmeStart = true
         this._changePlaneMode()
     }
 
-    public addScore() {
+    public gameReStart() {
+        this.isGagmeStart = true
+        this._currentShootTime = 1
+        this._isShooting = false
+        this._currentCreateEnemyTime = 0
+        this._combinationInterval = Constant.Combination.PLAN1
+        this._bulletPropType = Constant.BulletPropType.BULLET_M
+        this._score = 0
+        if (this.playerPlane.node) {
+            this.playerPlane.node.setPosition(0, 0, 9) 
+        }
+    }
 
+    public gameOver() {
+        this.isGagmeStart = false
+        this.gamePage.active = false
+        this.gameOverPage.active = true
+        this.gameOverScore.string = this._score.toString()
+        this._isShooting = false
+        this.playerPlane.init()
+        this.unschedule(this._planeChange)
+        this._destroyAll()
+    }
+
+    public addScore() {
+        this._score++
+        this.gameScore.string = this._score.toString()
     }
 
     public createPalyerBulletM() {
@@ -159,7 +221,7 @@ export class GameManager extends Component {
     private _createPlayerBullet(target: Prefab, x: number, direction: number = Constant.Direction.MIDDLE) {
         const bullet = instantiate(target)
         bullet.setParent(this.bulletRoot)
-        const pos = this.playerPlane.position
+        const pos = this.playerPlane.node.position
         bullet.setPosition(pos.x + x, pos.y + 1, pos.z - 7)
         const bulletComp = bullet.getComponent(Bullet)
         bulletComp.setBullet(this.bulletSpeed, false, direction)
@@ -275,6 +337,11 @@ export class GameManager extends Component {
             speed = this.enemy2Speed
         }
         return { prefab, speed }
+    }
+
+    private _destroyAll() {
+        this.node.destroyAllChildren()
+        this.bulletRoot.destroyAllChildren()
     }
 }
 
