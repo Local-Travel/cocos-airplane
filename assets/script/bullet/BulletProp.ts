@@ -60,7 +60,7 @@ export class BulletProp extends Component {
     }
 
     private _onTriggerEnter(event: ITriggerEvent) {
-        const name = event.selfCollider.name
+        const name = event.selfCollider.node.name
         switch(name) {
             case 'bulletH':
                 this._gameManager.changeBulletType(Constant.BulletPropType.BULLET_H)

@@ -39,6 +39,12 @@ export class Constant {
         BULLET_H: 2,
         BULLET_S: 3
     }
+
+    public static Direction = {
+        LEFT: 1,
+        MIDDLE: 2,
+        RIGHT: 3
+    }
 }
 
 /**

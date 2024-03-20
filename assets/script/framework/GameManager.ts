@@ -85,7 +85,14 @@ export class GameManager extends Component {
         this._currentShootTime += deltaTime
         this._currentCreateEnemyTime += deltaTime
         if (this._isShooting && this._currentShootTime > this.shootTime) {
-            this.createPalyerBullet()
+            if (this._bulletPropType === Constant.BulletPropType.BULLET_H) {
+                this.createPalyerBulletH()
+            } else if (this._bulletPropType === Constant.BulletPropType.BULLET_S) {
+                this.createPalyerBulletS()
+            } else {
+                this.createPalyerBulletM()
+            }
+
             this._currentShootTime = 0
         }
 
@@ -129,13 +136,33 @@ export class GameManager extends Component {
 
     }
 
-    public createPalyerBullet() {
-        const bullet = instantiate(this.bullet01)
+    public createPalyerBulletM() {
+        this._createPlayerBullet(this.bullet01, 0)
+    }
+
+    public createPalyerBulletH() {
+        // left
+        this._createPlayerBullet(this.bullet03, -2.5)
+        // right
+        this._createPlayerBullet(this.bullet03, 2.5)
+    }
+
+    public createPalyerBulletS() {
+        // left
+        this._createPlayerBullet(this.bullet05, -4, Constant.Direction.LEFT)
+        // middle
+        this._createPlayerBullet(this.bullet05, 0, Constant.Direction.MIDDLE)
+        // right
+        this._createPlayerBullet(this.bullet05, 4, Constant.Direction.RIGHT)
+    }
+
+    private _createPlayerBullet(target: Prefab, x: number, direction: number = Constant.Direction.MIDDLE) {
+        const bullet = instantiate(target)
         bullet.setParent(this.bulletRoot)
         const pos = this.playerPlane.position
-        bullet.setPosition(pos.x, pos.y + 1, pos.z - 7)
+        bullet.setPosition(pos.x + x, pos.y + 1, pos.z - 7)
         const bulletComp = bullet.getComponent(Bullet)
-        bulletComp.setBullet(this.bulletSpeed, false)
+        bulletComp.setBullet(this.bulletSpeed, false, direction)
     }
 
     public createEnemyBullet(targetPos: Vec3) {
@@ -143,7 +170,7 @@ export class GameManager extends Component {
         bullet.setParent(this.bulletRoot)
         bullet.setPosition(targetPos.x, targetPos.y + 1, targetPos.z + 6)
         const bulletComp = bullet.getComponent(Bullet)
-        bulletComp.setBullet(1, true)
+        bulletComp.setBullet(1, true, Constant.Direction.MIDDLE)
 
         const colliderGroup = bullet.getComponent(BoxCollider)
         colliderGroup.setGroup(Constant.CollisionType.ENEMY_BULLET)

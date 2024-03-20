@@ -22,6 +22,8 @@ export class Bullet extends Component {
 
     private _isEnemyBullet = false
 
+    private _direction = Constant.Direction.MIDDLE
+
     start () {
         // [3]
     }
@@ -43,18 +45,29 @@ export class Bullet extends Component {
     update (deltaTime: number) {
         const pos = this.node.position
         let moveLength = pos.z - this._bulletSpeed
+        let moveX = pos.x 
         if (this._isEnemyBullet) {
             moveLength = pos.z + this._bulletSpeed
+        } else {
+            if (this._direction === Constant.Direction.LEFT) {
+                moveX = pos.x - this._bulletSpeed * 0.2
+            }
+            if (this._direction === Constant.Direction.RIGHT) {
+                moveX = pos.x + this._bulletSpeed * 0.2
+            }
         }
-        this.node.setPosition(pos.x, pos.y, moveLength)
+
+        this.node.setPosition(moveX, pos.y, moveLength)
+        
         if (moveLength > 90 || moveLength < -270) {
             this.node.destroy()
         }
     }
 
-    setBullet(speed: number, isEnemyBullet: boolean) {
+    setBullet(speed: number, isEnemyBullet: boolean, direction: number = Constant.Direction.MIDDLE) {
         this._bulletSpeed = speed
         this._isEnemyBullet = isEnemyBullet
+        this._direction = direction
     }
 
     private _onTriggerEnter(event: ITriggerEvent) {
