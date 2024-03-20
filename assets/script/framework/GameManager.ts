@@ -1,8 +1,9 @@
 
-import { _decorator, BoxCollider, Component, instantiate, math, Node, Prefab, Vec3 } from 'cc';
+import { _decorator, BoxCollider, Component, instantiate, macro, math, Node, Prefab, Vec3 } from 'cc';
 import { Bullet } from '../bullet/Bullet';
 import { Constant } from './Constant';
 import { EnemyPlane } from '../plane/EnemyPlane';
+import { BulletProp } from '../bullet/BulletProp';
 const { ccclass, property } = _decorator;
 
 /**
@@ -47,6 +48,16 @@ export class GameManager extends Component {
     @property(Prefab)
     public enemy02: Prefab = null
 
+    // bulletProp
+    @property(Prefab)
+    public bulletM: Prefab = null
+    @property(Prefab)
+    public bulletS: Prefab = null
+    @property(Prefab)
+    public bulletH: Prefab = null
+    @property
+    public bulletPropSpeed = 0.3
+
     @property
     public createEnemyTime = 1
     @property
@@ -64,6 +75,7 @@ export class GameManager extends Component {
     private _isShooting = false
     private _currentCreateEnemyTime = 0
     private _combinationInterval = Constant.Combination.PLAN1
+    private _bulletPropType = Constant.BulletPropType.BULLET_M 
 
     start () {
         this._init()
@@ -138,6 +150,10 @@ export class GameManager extends Component {
         colliderGroup.setMask(Constant.CollisionType.SELF_PLANE)
     }
 
+    public changeBulletType(type: number) {
+        this._bulletPropType = type
+    }
+
     public isShooting(val: boolean) {
         this._isShooting = val
     }
@@ -192,12 +208,32 @@ export class GameManager extends Component {
         }
     }
 
+    public createBulletProp() {
+        const bulletPropType = math.randomRangeInt(1, 4)
+        let prefab: Prefab = null
+        if (bulletPropType === Constant.BulletPropType.BULLET_H) {
+            prefab = this.bulletH
+        } else if (bulletPropType === Constant.BulletPropType.BULLET_S) {
+            prefab = this.bulletS
+        } else {
+            prefab = this.bulletM
+        }
+
+        const bulletProp = instantiate(prefab)
+        const randX = math.randomRangeInt(-15, 15)
+        bulletProp.setPosition(randX, 0, -50)
+        bulletProp.setParent(this.node)
+        const propComp = bulletProp.getComponent(BulletProp)
+        propComp.setBulletProp(this, -this.bulletPropSpeed)
+    }
+
     private _changePlaneMode() {
-        this.schedule(this._planeChange, 10, 3)
+        this.schedule(this._planeChange, 10, macro.REPEAT_FOREVER)
     }
 
     private _planeChange() {
         this._combinationInterval++
+        this.createBulletProp()
     }
 
     private _getRandType(): EnemyPlaneInstance {

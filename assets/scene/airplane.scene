@@ -743,6 +743,19 @@
       "__uuid__": "03583264-9d17-401d-a26d-8db2c5226614",
       "__expectedType__": "cc.Prefab"
     },
+    "bulletM": {
+      "__uuid__": "b4adf013-21a0-4f4a-af99-3f565d646626",
+      "__expectedType__": "cc.Prefab"
+    },
+    "bulletS": {
+      "__uuid__": "9da223ab-705c-4c05-8fd8-e2c4a389a765",
+      "__expectedType__": "cc.Prefab"
+    },
+    "bulletH": {
+      "__uuid__": "3a6634a6-4eed-4546-b004-163106506d73",
+      "__expectedType__": "cc.Prefab"
+    },
+    "bulletPropSpeed": 0.3,
     "createEnemyTime": 1,
     "enemy1Speed": 0.5,
     "enemy2Speed": 0.7,
