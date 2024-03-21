@@ -41,6 +41,8 @@ export class UIMain extends Component {
         this.node.on(SystemEvent.EventType.TOUCH_END, this._touchEnd, this)
 
         this.gameStart.active = true
+        this.gameOver.active = false
+        this.game.active = false
     }
 
     // update (deltaTime: number) {
@@ -63,9 +65,11 @@ export class UIMain extends Component {
         if (this.gameManager.isGagmeStart) {
             this.gameManager.isShooting(true)
         } else {
-            this.gameStart.active = false
-            this.game.active = true
-            this.gameManager.gameStart()
+            if (!this.gameOver.active) {
+                this.gameStart.active = false
+                this.game.active = true
+                this.gameManager.gameStart()
+            }
         }
     }
 

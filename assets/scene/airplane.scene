@@ -593,7 +593,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 190.527,
+      "y": 283.76,
       "z": 0
     },
     "_lrot": {
@@ -701,7 +701,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -162.266,
+      "y": -284.635,
       "z": 0
     },
     "_lrot": {
@@ -1316,7 +1316,7 @@
         "__id__": 60
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 64
@@ -1329,7 +1329,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": 1,
       "z": 0
     },
     "_lrot": {
@@ -1465,7 +1465,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 200,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -1499,8 +1499,8 @@
     "_string": "再来一局",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 40,
-    "_fontSize": 40,
+    "_actualFontSize": 50,
+    "_fontSize": 50,
     "_fontFamily": "Arial",
     "_lineHeight": 60,
     "_overflow": 0,
@@ -1670,7 +1670,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -242.072,
+      "y": -315.911,
       "z": 0
     },
     "_lrot": {
@@ -1752,7 +1752,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 200,
+      "width": 175,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -1785,8 +1785,8 @@
     "_string": "返回主界面",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 40,
-    "_fontSize": 40,
+    "_actualFontSize": 35,
+    "_fontSize": 35,
     "_fontFamily": "Arial",
     "_lineHeight": 60,
     "_overflow": 0,
@@ -1953,7 +1953,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 138.487,
+      "y": 349.82,
       "z": 0
     },
     "_lrot": {
@@ -2094,8 +2094,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 80,
-      "height": 50.4
+      "width": 140,
+      "height": 113
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2124,13 +2124,13 @@
       "b": 255,
       "a": 255
     },
-    "_string": "本局得分",
+    "_string": "本局得分\n",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 20,
-    "_fontSize": 20,
+    "_actualFontSize": 35,
+    "_fontSize": 35,
     "_fontFamily": "Arial",
-    "_lineHeight": 40,
+    "_lineHeight": 50,
     "_overflow": 0,
     "_enableWrapText": true,
     "_font": null,
@@ -2166,7 +2166,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 127.759,
+      "y": 382.209,
       "z": 0
     },
     "_lrot": {
@@ -2307,8 +2307,8 @@
     "_target": null,
     "_left": 0,
     "_right": 0,
-    "_top": 0,
-    "_bottom": 0,
+    "_top": -1,
+    "_bottom": 1,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
     "_isAbsLeft": true,

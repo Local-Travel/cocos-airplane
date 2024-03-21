@@ -150,6 +150,7 @@ export class GameManager extends Component {
 
     private _init() {
         this._currentShootTime = this.shootTime
+        this.playerPlane.init()
     }
 
     public returnMain() {
@@ -166,13 +167,14 @@ export class GameManager extends Component {
 
     public gameStart() {
         this.isGagmeStart = true
+        this._score = 0
+        this.gameScore.string = this._score.toString()
         this._changePlaneMode()
     }
 
     public gameReStart() {
         this.isGagmeStart = true
         this._currentShootTime = 1
-        this._isShooting = false
         this._currentCreateEnemyTime = 0
         this._combinationInterval = Constant.Combination.PLAN1
         this._bulletPropType = Constant.BulletPropType.BULLET_M
@@ -180,6 +182,7 @@ export class GameManager extends Component {
         if (this.playerPlane.node) {
             this.playerPlane.node.setPosition(0, 0, 9) 
         }
+        this._changePlaneMode()
     }
 
     public gameOver() {
