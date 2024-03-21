@@ -25,7 +25,7 @@ interface EnemyPlaneInstance {
     prefab: Prefab, 
     speed: number
 }
- 
+// 游戏的主要逻辑
 @ccclass('GameManager')
 export class GameManager extends Component {
     @property(SelfPlane)

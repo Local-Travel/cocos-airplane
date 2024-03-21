@@ -16,6 +16,7 @@ const { ccclass, property } = _decorator;
  *
  */
  
+// 子弹管理
 @ccclass('Bullet')
 export class Bullet extends Component {
 

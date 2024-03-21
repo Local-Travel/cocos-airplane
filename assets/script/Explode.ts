@@ -15,6 +15,7 @@ const { ccclass, property } = _decorator;
  *
  */
  
+// 敌家飞机爆炸的回收
 @ccclass('Explode')
 export class Explode extends Component {
     

@@ -20,7 +20,8 @@ interface IDictPool {
 interface IDictPrefab {
     [name: string]: Prefab
 }
- 
+
+// 节点池管理，用于存储已创建的节点，减少创建和销毁的过程，优化性能
 @ccclass('PoolManager')
 export class PoolManager {
     private _dictPool: IDictPool = {}

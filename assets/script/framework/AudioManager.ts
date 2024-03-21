@@ -17,7 +17,8 @@ const { ccclass, property } = _decorator;
 interface IAudioMap {
     [name: string]: AudioClip
 }
- 
+// 声音资源文件管理，飞机和背景的是单独管理
+// 背景音乐并没有开启，感觉太吵了，可以在编辑器中audio/bgm下开启Loop和PlayOnAwake
 @ccclass('AudioManager')
 export class AudioManager extends Component {
     @property([AudioClip])

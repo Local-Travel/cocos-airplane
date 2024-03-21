@@ -17,7 +17,8 @@ const { ccclass, property } = _decorator;
  *
  */
 const OUTOFBOUND = 90
- 
+
+// 敌家飞机
 @ccclass('EnemyPlane')
 export class EnemyPlane extends Component {
     @property

@@ -15,6 +15,7 @@ const { ccclass, property } = _decorator;
  *
  */
  
+// 游戏的主控，管理各种页面
 @ccclass('UIMain')
 export class UIMain extends Component {
     // [1]

@@ -14,6 +14,7 @@ const { ccclass, property } = _decorator;
  *
  */
  
+// 游戏背景管理
 @ccclass('MovingSceneBg')
 export class MovingSceneBg extends Component {
     // [1]

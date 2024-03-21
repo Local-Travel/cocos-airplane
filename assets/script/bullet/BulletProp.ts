@@ -19,6 +19,7 @@ const { ccclass, property } = _decorator;
  
 const XRANGE = 15
 
+// 子弹升级道具
 @ccclass('BulletProp')
 export class BulletProp extends Component {
     private _bulletSpeed = 0.3
