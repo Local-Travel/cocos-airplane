@@ -1,6 +1,7 @@
 
 import { _decorator, Collider, Component, ITriggerEvent, Node } from 'cc';
 import { Constant } from '../framework/Constant';
+import { PoolManager } from '../framework/PoolManager';
 const { ccclass, property } = _decorator;
 
 /**
@@ -60,7 +61,8 @@ export class Bullet extends Component {
         this.node.setPosition(moveX, pos.y, moveLength)
         
         if (moveLength > 90 || moveLength < -270) {
-            this.node.destroy()
+            PoolManager.instance().putNode(this.node)
+            // this.node.destroy()
         }
     }
 
@@ -72,7 +74,8 @@ export class Bullet extends Component {
 
     private _onTriggerEnter(event: ITriggerEvent) {
         // console.log('bullet destroy')
-        this.node.destroy()
+        // this.node.destroy()
+        PoolManager.instance().putNode(this.node)
     }
 }
 

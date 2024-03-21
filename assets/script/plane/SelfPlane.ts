@@ -1,5 +1,5 @@
 
-import { _decorator, Collider, Component, EventTouch, ICollisionEvent, ITriggerEvent, Node, SystemEvent, systemEvent, Touch } from 'cc';
+import { _decorator, AudioSource, Collider, Component, EventTouch, ICollisionEvent, ITriggerEvent, Node, SystemEvent, systemEvent, Touch } from 'cc';
 import { Constant } from '../framework/Constant';
 const { ccclass, property } = _decorator;
 
@@ -22,6 +22,11 @@ export class SelfPlane extends Component {
     public isLive = true
 
     private _curLife = 0
+    private _audioSource: AudioSource = null
+
+    start() {
+        this._audioSource = this.getComponent(AudioSource)
+    }
     
     onEnable() {
         const collider = this.getComponent(Collider)
@@ -37,14 +42,14 @@ export class SelfPlane extends Component {
         }
     }
 
+    // update (deltaTime: number) {
+    //     // [4]
+    // }
+
     public init() {
         this._curLife = this.lifeValue
         this.isLive = true
     }
-
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
 
     private _onTriggerEnter(event: ITriggerEvent) {
         const collisionGroup = event.otherCollider.getGroup()
@@ -53,6 +58,7 @@ export class SelfPlane extends Component {
             if (this._curLife <= 0) {
                 console.log('plane die')
                 this.isLive = false
+                this._audioSource.play()
             }
         }
     }
