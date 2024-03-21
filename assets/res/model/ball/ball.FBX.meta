@@ -2,12 +2,12 @@
   "ver": "2.1.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "bee339d2-7ff8-4c2b-8755-907e47f32647",
+  "uuid": "41972c30-e4f5-4427-ba84-a2d1884400f1",
   "files": [],
   "subMetas": {
     "97298": {
       "importer": "gltf-mesh",
-      "uuid": "bee339d2-7ff8-4c2b-8755-907e47f32647@97298",
+      "uuid": "41972c30-e4f5-4427-ba84-a2d1884400f1@97298",
       "displayName": "",
       "id": "97298",
       "name": "ball.mesh",
@@ -24,7 +24,7 @@
     },
     "8a942": {
       "importer": "gltf-material",
-      "uuid": "bee339d2-7ff8-4c2b-8755-907e47f32647@8a942",
+      "uuid": "41972c30-e4f5-4427-ba84-a2d1884400f1@8a942",
       "displayName": "",
       "id": "8a942",
       "name": "ball.material",
@@ -40,7 +40,7 @@
     },
     "8c1b3": {
       "importer": "gltf-scene",
-      "uuid": "bee339d2-7ff8-4c2b-8755-907e47f32647@8c1b3",
+      "uuid": "41972c30-e4f5-4427-ba84-a2d1884400f1@8c1b3",
       "displayName": "",
       "id": "8c1b3",
       "name": "ball.prefab",
@@ -58,18 +58,18 @@
   "userData": {
     "imageMetas": [],
     "legacyFbxImporter": false,
-    "redirect": "bee339d2-7ff8-4c2b-8755-907e47f32647@8c1b3",
+    "redirect": "41972c30-e4f5-4427-ba84-a2d1884400f1@8c1b3",
     "assetFinder": {
       "meshes": [
-        "bee339d2-7ff8-4c2b-8755-907e47f32647@97298"
+        "41972c30-e4f5-4427-ba84-a2d1884400f1@97298"
       ],
       "skeletons": [],
       "textures": [],
       "materials": [
-        "bee339d2-7ff8-4c2b-8755-907e47f32647@8a942"
+        "41972c30-e4f5-4427-ba84-a2d1884400f1@8a942"
       ],
       "scenes": [
-        "bee339d2-7ff8-4c2b-8755-907e47f32647@8c1b3"
+        "41972c30-e4f5-4427-ba84-a2d1884400f1@8c1b3"
       ]
     }
   }

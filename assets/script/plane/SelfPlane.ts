@@ -17,7 +17,8 @@ const { ccclass, property } = _decorator;
  
 @ccclass('SelfPlane')
 export class SelfPlane extends Component {
-
+    @property(Node)
+    public explode: Node = null
     public lifeValue = 5
     public isLive = true
 
@@ -49,6 +50,7 @@ export class SelfPlane extends Component {
     public init() {
         this._curLife = this.lifeValue
         this.isLive = true
+        this.explode.active = false
     }
 
     private _onTriggerEnter(event: ITriggerEvent) {
@@ -58,6 +60,7 @@ export class SelfPlane extends Component {
             if (this._curLife <= 0) {
                 console.log('plane die')
                 this.isLive = false
+                this.explode.active = true
                 this._audioSource.play()
             }
         }

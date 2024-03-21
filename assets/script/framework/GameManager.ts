@@ -50,6 +50,8 @@ export class GameManager extends Component {
     public enemy01: Prefab = null
     @property(Prefab)
     public enemy02: Prefab = null
+    @property(Prefab)
+    public enemyExplode: Prefab = null
 
     // bulletProp
     @property(Prefab)
@@ -177,20 +179,20 @@ export class GameManager extends Component {
         this.isGagmeStart = true
         this._score = 0
         this.gameScore.string = this._score.toString()
+        this.playerPlane.init()
         this._changePlaneMode()
     }
 
     public gameReStart() {
-        this.isGagmeStart = true
-        this._currentShootTime = 1
+        this.gameStart()
+        this._currentShootTime = 0
         this._currentCreateEnemyTime = 0
         this._combinationInterval = Constant.Combination.PLAN1
         this._bulletPropType = Constant.BulletPropType.BULLET_M
-        this._score = 0
+        this.playerPlane.init()
         if (this.playerPlane.node) {
             this.playerPlane.node.setPosition(0, 0, 9) 
         }
-        this._changePlaneMode()
     }
 
     public gameOver() {
@@ -199,7 +201,6 @@ export class GameManager extends Component {
         this.gameOverPage.active = true
         this.gameOverScore.string = this._score.toString()
         this._isShooting = false
-        this.playerPlane.init()
         this.unschedule(this._planeChange)
         this._destroyAll()
     }
@@ -262,6 +263,11 @@ export class GameManager extends Component {
 
     public isShooting(val: boolean) {
         this._isShooting = val
+    }
+
+    public createEnemyEffect(pos: Vec3) {
+        const enemy = PoolManager.instance().getNode(this.enemyExplode, this.node)
+        enemy.setPosition(pos)
     }
 
     public createEnemyPlane() {
